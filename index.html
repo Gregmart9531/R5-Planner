@@ -3,17 +3,19 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>R5 Plan — R5 52 kWh</title>
+<title>R5 52 kWh — Planificateur multi-réseaux</title>
 
-<meta name="theme-color" content="#080808">
+<meta name="theme-color" content="#151C24">
 <meta name="description" content="Planificateur R5 52 kWh multi-réseaux, optimisé temps ou prix, avec météo, arrêts et guidage par étapes.">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="R5 Plan">
 <meta name="mobile-web-app-capable" content="yes">
-<link rel="manifest" href="./manifest.webmanifest">
-<link rel="icon" type="image/png" sizes="192x192" href="./icon-192.png">
-<link rel="apple-touch-icon" href="./icon-192.png">
+<link rel="manifest" href="./manifest.webmanifest?v5">
+<link rel="icon" type="image/png" sizes="32x32" href="./favicon-32.png?v5">
+<link rel="icon" type="image/png" sizes="16x16" href="./favicon-16.png?v5">
+<link rel="icon" type="image/png" sizes="192x192" href="./icon-192.png?v5">
+<link rel="apple-touch-icon" href="./apple-touch-icon.png?v5">
 
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
@@ -1074,53 +1076,11 @@ async function startPlan(){clearErr(); if(!geoSel.dep || !geoSel.arr){showErr("S
 
 
 <script>
-(function(){
-  let deferredPrompt = null;
-  function ensureInstallButton(){
-    if(document.getElementById('installPwaBtn')) return;
-    const btn = document.createElement('button');
-    btn.id = 'installPwaBtn';
-    btn.type = 'button';
-    btn.textContent = '📲 Installer l’app';
-    btn.style.cssText = 'position:fixed;right:16px;bottom:16px;z-index:99999;background:#FFE14D;color:#000;border:none;border-radius:999px;padding:14px 18px;font:700 14px Syne,sans-serif;box-shadow:0 10px 30px rgba(0,0,0,.35);display:none';
-    btn.addEventListener('click', async ()=>{
-      if(deferredPrompt){
-        deferredPrompt.prompt();
-        try{ await deferredPrompt.userChoice; }catch(_e){}
-      }else{
-        alert("Sur iPhone : Safari > Partager > Sur l’écran d’accueil.\nSur Android : menu du navigateur > Installer l’application.");
-      }
-    });
-    document.body.appendChild(btn);
-  }
-
-  function showInstallButton(show){
-    const btn = document.getElementById('installPwaBtn');
-    if(btn) btn.style.display = show ? 'block' : 'none';
-  }
-
-  window.addEventListener('beforeinstallprompt', (e)=>{
-    e.preventDefault();
-    deferredPrompt = e;
-    ensureInstallButton();
-    showInstallButton(true);
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', function() {
+    navigator.serviceWorker.register('./sw.js?v5').catch(function(){});
   });
-
-  window.addEventListener('appinstalled', ()=>{
-    deferredPrompt = null;
-    showInstallButton(false);
-  });
-
-  window.addEventListener('load', ()=>{
-    ensureInstallButton();
-    if(window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone){
-      showInstallButton(false);
-    }
-    if('serviceWorker' in navigator){
-      navigator.serviceWorker.register('./sw.js').catch(()=>{});
-    }
-  });
-})();
+}
 </script>
 
 </body>

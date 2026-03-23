@@ -1,23 +1,23 @@
-# R5 Plan — GitHub Pages
+R5 Plan — pack GitHub Pages propre
 
-## Fichiers
-- `index.html`
-- `manifest.webmanifest`
-- `sw.js`
-- `icons/`
-- `.nojekyll`
+Contenu :
+- index.html
+- manifest.webmanifest
+- sw.js
+- .nojekyll
+- icon-192.png
+- icon-512.png
+- apple-touch-icon.png
+- favicon-32.png
+- favicon-16.png
+- dossier icons/ en secours
 
-## Mise en ligne sur GitHub Pages
-1. Crée un dépôt GitHub.
-2. Dépose tous les fichiers de ce dossier à la racine du dépôt.
-3. Va dans **Settings > Pages**.
-4. Choisis **Deploy from a branch**.
-5. Sélectionne la branche `main` et le dossier `/ (root)`.
-6. Attends la publication, puis ouvre l'URL fournie par GitHub Pages.
+Important :
+1. Remplacer les fichiers existants du repo par CE pack.
+2. Supprimer l'ancien dossier "Icons" s'il existe encore.
+3. Garder uniquement le dossier "icons" en minuscules.
+4. Committer sur la branche main.
+5. Attendre 1 à 3 minutes que GitHub Pages republie.
+6. Supprimer l'ancienne app de l'écran d'accueil puis réinstaller depuis l'URL GitHub Pages.
 
-## Utilisation
-- Sur Android : ouvre le site puis installe l'app depuis le bouton ou le menu du navigateur.
-- Sur iPhone : ouvre le site dans Safari puis **Partager > Sur l’écran d’accueil**.
-
-## Remarque
-La géolocalisation est plus fiable en HTTPS que lors d'une ouverture locale `content://` ou `file://`.
+Version cache/icônes : v5
